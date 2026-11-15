@@ -8,7 +8,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#020617">
     <script src="config.js"></script>
-    <script>try{var t=localStorage.getItem("guardurl_theme");if(t==="light"||(!t&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches)){document.documentElement.classList.remove("dark");document.documentElement.classList.add("light")}}catch(e){}</script>
+    <script>try{var t=localStorage.getItem("lamh_theme");if(t==="light"||(!t&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches)){document.documentElement.classList.remove("dark");document.documentElement.classList.add("light")}}catch(e){}</script>
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>لَمْحَ | LAMH | Phishing Link Detector</title>
     
@@ -247,7 +247,7 @@ html.light #toast{box-shadow:0 10px 30px rgba(15,23,42,.15)}
 
 </style>
 
-<style id="aman-cyber-wallpaper">
+<style id="lamh-cyber-wallpaper">
   html, body { min-height: 100%; }
   body#appBody {
     background-color: #020617 !important;
@@ -257,9 +257,9 @@ html.light #toast{box-shadow:0 10px 30px rgba(15,23,42,.15)}
     background-position: center center, center center !important;
     background-repeat: no-repeat !important;
     background-attachment: fixed !important;
-    animation: amanSpaceDrift 42s ease-in-out infinite alternate;
+    animation: lamhSpaceDrift 42s ease-in-out infinite alternate;
   }
-  @keyframes amanSpaceDrift {
+  @keyframes lamhSpaceDrift {
     from { background-position: center center, 48% 48%; }
     to { background-position: center center, 53% 52%; }
   }
@@ -269,7 +269,7 @@ html.light #toast{box-shadow:0 10px 30px rgba(15,23,42,.15)}
     body#appBody { animation: none !important; }
   }
 </style>
-<style id="aman-theme-layout-fixes">
+<style id="lamh-theme-layout-fixes">
   /* Robust sticky-footer layout: keep the attribution bar at the actual bottom of the page. */
   html, body#appBody { min-height: 100%; }
   body#appBody {
@@ -296,8 +296,8 @@ html.light #toast{box-shadow:0 10px 30px rgba(15,23,42,.15)}
     color: #0f172a;
   }
   html.light body#appBody header { background: rgba(255,255,255,.96) !important; }
-  html.light #aman-celestial-layer { display: none !important; }
-  html:not(.light) #aman-celestial-layer { display: block; }
+  html.light #lamh-celestial-layer { display: none !important; }
+  html:not(.light) #lamh-celestial-layer { display: block; }
 </style>
 <style id="lamh-logo-css">
 .lamh-logo{width:42px;height:42px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1px rgba(56,189,248,.35),0 6px 18px rgba(14,165,233,.28);background:#02050d}
@@ -321,7 +321,7 @@ html.light #toast{box-shadow:0 10px 30px rgba(15,23,42,.15)}
 @keyframes lamh-ping{0%{opacity:1;transform:scale(1.8)}12%{opacity:1;transform:scale(1)}65%{opacity:.25}100%{opacity:.25}}
 @media (prefers-reduced-motion:reduce){.lamh-blip{opacity:.85!important}}
 </style>
-<style id="aman-custom-scrollbar">
+<style id="lamh-custom-scrollbar">
   /* Unified scrollbar for the whole page and every inner scroll area (dark + light themes) */
   html.dark, html:not(.light) { color-scheme: dark; --sb-track: #020617; --sb-thumb: #334155; --sb-thumb-hover: #0ea5e9; }
   html.light { color-scheme: light; --sb-track: #f1f5f9; --sb-thumb: #cbd5e1; --sb-thumb-hover: #0ea5e9; }
@@ -755,7 +755,7 @@ html.light #toast{box-shadow:0 10px 30px rgba(15,23,42,.15)}
             del(k) { try { localStorage.removeItem(k); } catch (e) {} }
         };
         let scanHistory = [];
-        try { const h = JSON.parse(store.get('guardurl_history') || '[]'); if (Array.isArray(h)) scanHistory = h; } catch (e) {}
+        try { const h = JSON.parse(store.get('lamh_history') || '[]'); if (Array.isArray(h)) scanHistory = h; } catch (e) {}
         let scanTimeout = null, toastTimer = null;
         let isScanning = false;
         let scanSeq = 0;
@@ -769,7 +769,7 @@ html.light #toast{box-shadow:0 10px 30px rgba(15,23,42,.15)}
     }
             renderHistory();
             syncThemeUI();
-            if (store.get('guardurl_lang') === 'en') { currentLang = 'en'; applyLang(); }
+            if (store.get('lamh_lang') === 'en') { currentLang = 'en'; applyLang(); }
             document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAdminModal(); });
             document.getElementById('adminModal').addEventListener('click', e => { if (e.target.id === 'adminModal') closeAdminModal(); });
         });
@@ -796,7 +796,7 @@ Object.assign(I18N.en,{adm_login_sub:"Enter your password to access the control 
 
         function toggleLanguage() {
             currentLang = currentLang === 'ar' ? 'en' : 'ar';
-            store.set('guardurl_lang', currentLang);
+            store.set('lamh_lang', currentLang);
             applyLang();
         }
 
@@ -818,8 +818,8 @@ Object.assign(I18N.en,{adm_login_sub:"Enter your password to access the control 
             const toLight = !root.classList.contains('light');
             root.classList.toggle('light', toLight);
             root.classList.toggle('dark', !toLight);
-            store.set('guardurl_theme', toLight ? 'light' : 'dark');
-            const celestialLayer = document.getElementById('aman-celestial-layer');
+            store.set('lamh_theme', toLight ? 'light' : 'dark');
+            const celestialLayer = document.getElementById('lamh-celestial-layer');
             if (celestialLayer) celestialLayer.style.display = toLight ? 'none' : 'block';
             syncThemeUI();
         }
@@ -1115,7 +1115,7 @@ async function analyzeAndShowResults(url, seq) {
         function saveToHistory(item) {
             scanHistory.unshift(item);
             if (scanHistory.length > 10) scanHistory.pop();
-            store.set('guardurl_history', JSON.stringify(scanHistory));
+            store.set('lamh_history', JSON.stringify(scanHistory));
             renderHistory();
         }
 
@@ -1171,7 +1171,7 @@ async function analyzeAndShowResults(url, seq) {
 
         function clearHistory() {
             scanHistory = [];
-            store.del('guardurl_history');
+            store.del('lamh_history');
             renderHistory();
             showToast(t('toast_clear'), 'ph-trash');
         }
@@ -1411,16 +1411,16 @@ async function admReset() { if (!(await askConfirm(a_('confirm_reset')))) return
     </script>
 
     <!-- طبقة شفافة للمؤثرات السماوية فقط؛ لا تغيّر الخلفية الحالية -->
-    <canvas id="aman-celestial-layer" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+    <canvas id="lamh-celestial-layer" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
     <style>
-      #aman-celestial-layer { display:block; }
+      #lamh-celestial-layer { display:block; }
       @media (prefers-reduced-motion: reduce) {
-        #aman-celestial-layer { display:none; }
+        #lamh-celestial-layer { display:none; }
       }
     </style>
     <script>
     (() => {
-      const canvas = document.getElementById('aman-celestial-layer');
+      const canvas = document.getElementById('lamh-celestial-layer');
       if (!canvas || !canvas.getContext) return;
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
